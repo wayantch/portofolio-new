@@ -1,22 +1,22 @@
 import React from "react";
+import { Link } from "react-scroll";
 
 const Navbar = () => {
     // menu
     const menuLink = [
-        { id: 1, name: "Beranda", href: "#beranda" },
-        { id: 2, name: "Tentang", href: "#tentang" },
-        { id: 3, name: "Proyek", href: "#proyek" },
-        { id: 4, name: "Keahlian", href: "#keahlian" },
-        { id: 5, name: "Kontak", href: "#kontak" },
+        { id: 1, name: "Beranda", href: "beranda" },
+        { id: 2, name: "Tentang", href: "tentang" },
+        { id: 3, name: "Proyek", href: "proyek" },
+        // { id: 4, name: "Keahlian", href: "keahlian" },
+        { id: 5, name: "Kontak", href: "kontak" },
     ];
-    // menu
 
     // scroll
     const [isScroll, setIsScroll] = React.useState(false);
 
     React.useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 10) {
+            if (window.scrollY > 20) {
                 setIsScroll(true);
             } else {
                 setIsScroll(false);
@@ -28,17 +28,46 @@ const Navbar = () => {
             window.removeEventListener("scroll", handleScroll);
         };
     }, []);
-    // scroll
+
+    // Open sidebar
+    const [isOpen, setIsOpen] = React.useState(false);
+    const sidebarRef = React.useRef();
+
+    const handleOpenSidebar = () => {
+        setIsOpen(!isOpen);
+    };
+
+    // Close sidebar when clicking outside
+    React.useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                sidebarRef.current &&
+                !sidebarRef.current.contains(event.target)
+            ) {
+                setIsOpen(false);
+            }
+        };
+
+        if (isOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isOpen]);
 
     return (
         <nav
-            className={`w-full fixed top-0 left-0 z-10 transition-all duration-300 ease-in-out ${
+            className={`w-full fixed top-0 left-0 z-10 transition-all duration-700 ease-in-out ${
                 isScroll ? "bg-white shadow-md " : "bg-transparent text-white"
             }`}
         >
             <div className="container py-5">
                 <div className="flex justify-between items-center">
-                    <div className="">
+                    <div>
                         <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
                             Wyntch.
                         </h1>
@@ -47,12 +76,15 @@ const Navbar = () => {
                         <ul className="flex gap-6">
                             {menuLink.map((link) => (
                                 <li key={link.id}>
-                                    <a
-                                        href={link.href}
-                                        className="text-lg font-medium hover:text-primary hover:border-b-2 pb-2 hover:border-primary transition-all duration-100 ease-in-out"
+                                    <Link
+                                        to={link.href}
+                                        smooth={true}
+                                        offset={-70}
+                                        duration={500}
+                                        className="cursor-pointer text-lg font-medium hover:text-primary hover:border-b-2 pb-2 hover:border-primary transition-all duration-100 ease-in-out"
                                     >
                                         {link.name}
-                                    </a>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -65,7 +97,7 @@ const Navbar = () => {
                             viewBox="0 0 24 24"
                             strokeWidth={1.5}
                             stroke="currentColor"
-                            className="size-6"
+                            className="w-6 h-6 hidden md:flex"
                         >
                             <path
                                 strokeLinecap="round"
@@ -76,7 +108,7 @@ const Navbar = () => {
                         <select
                             name="language"
                             id="language"
-                            className="md:block hidden  appearance-none px-4 py-2 rounded-md bg-white border border-gray-300 text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                            className="md:block hidden appearance-none px-4 py-2 rounded-md bg-white border border-gray-300 text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                         >
                             <option value="id">Indonesia</option>
                             <option value="en">English</option>
@@ -84,14 +116,17 @@ const Navbar = () => {
                         </select>
                         {/* language */}
 
-                        <div className="md:hidden cursor-pointer">
+                        <div
+                            onClick={handleOpenSidebar}
+                            className="md:hidden cursor-pointer"
+                        >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 strokeWidth={1.5}
                                 stroke="currentColor"
-                                className="size-7"
+                                className="w-7 h-7"
                             >
                                 <path
                                     strokeLinecap="round"
@@ -103,6 +138,33 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Navbar Mobile */}
+            {isOpen && (
+                <div
+                    ref={sidebarRef}
+                    className="bg-white md:hidden w-[80%] h-[100vh] z-10 fixed top-0 left-0 transition-all duration-300 ease-in-out"
+                >
+                    <h1 className="container pt-5 text-3xl font-bold bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
+                        Wyntch.
+                    </h1>
+                    <ul className="flex flex-col gap-6 p-6">
+                        {menuLink.map((link) => (
+                            <li key={link.id}>
+                                <Link
+                                    to={link.href}
+                                    smooth={true}
+                                    offset={-70}
+                                    duration={500}
+                                    className="cursor-pointer text-lg text-black font-medium hover:text-primary hover:border-b-2 pb-2 hover:border-primary transition-all duration-100 ease-in-out"
+                                >
+                                    {link.name}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
         </nav>
     );
 };

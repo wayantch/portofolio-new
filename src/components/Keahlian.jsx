@@ -1,29 +1,53 @@
-import React from 'react';
+import React from "react";
 
 const Keahlian = () => {
-  const skills = [
-    { name: 'HTML', level: 'Dasar' },
-    { name: 'CSS', level: 'Dasar' },
-    { name: 'JavaScript', level: 'Menengah' },
-    { name: 'React', level: 'Menengah' },
-    { name: 'Tailwind CSS', level: 'Menengah' },
-    { name: 'PHP', level: 'Dasar' },
-    { name: 'Laravel', level: 'Dasar' },
-    { name: 'MySQL', level: 'Dasar' },
-  ];
-
   return (
-    <div className="mt-16">
+    <div className="bg-gray-100 py-12 mt-10">
       <div className="container">
-        <h1 className='border-l-4 border-primary pl-2 text-3xl font-semibold mb-5'>Keahlian</h1>
-        <div className="w-full bg-white shadow-lg rounded-xl p-5">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {skills.map((skill, index) => (
-              <div key={index} className="border p-4 rounded-lg shadow-sm">
-                <h2 className="font-semibold text-lg">{skill.name}</h2>
-                <p className="text-gray-600">Tingkat: {skill.level}</p>
-              </div>
-            ))}
+        <h2 className="text-3xl font-semibold text-primary text-center mb-8">
+          Keahlian Saya
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Keahlian 1 */}
+          <div className="w-full rounded-xl bg-white shadow-[0px_0px_15px_rgba(0,0,0,0.09)] p-9 space-y-3 relative overflow-hidden">
+            <div className="w-24 h-24 bg-blue-500 rounded-full absolute -right-5 -top-7">
+              <p className="absolute bottom-6 left-7 text-white text-2xl">01</p>
+            </div>
+            <div className="fill-blue-500 w-12">
+            <i className="bx bx-code-block text-blue-500 text-6xl mb-2"></i>
+            </div>
+            <h1 className="font-semibold text-xl text-primary">Front-end Development</h1>
+            <p className="text-sm text-zinc-500 leading-6">
+              Menguasai HTML, CSS, JavaScript, dan framework seperti React.
+            </p>
+          </div>
+
+          {/* Keahlian 2 */}
+          <div className="w-full rounded-xl bg-white shadow-[0px_0px_15px_rgba(0,0,0,0.09)] p-9 space-y-3 relative overflow-hidden">
+            <div className="w-24 h-24 bg-blue-500 rounded-full absolute -right-5 -top-7">
+              <p className="absolute bottom-6 left-7 text-white text-2xl">02</p>
+            </div>
+            <div className="fill-blue-500 w-12">
+            <i className="bx bx-server text-blue-500 text-6xl mb-2"></i>
+            </div>
+            <h1 className="font-semibold text-xl text-primary">Front-end Development</h1>
+            <p className="text-sm text-zinc-500 leading-6">
+              Menguasai HTML, CSS, JavaScript, dan framework seperti React.
+            </p>
+          </div>
+
+          {/* Keahlian 3 */}
+          <div className="w-full rounded-xl bg-white shadow-[0px_0px_15px_rgba(0,0,0,0.09)] p-9 space-y-3 relative overflow-hidden">
+            <div className="w-24 h-24 bg-blue-500 rounded-full absolute -right-5 -top-7">
+              <p className="absolute bottom-6 left-7 text-white text-2xl">03</p>
+            </div>
+            <div className="fill-blue-500 w-12">
+            <i className="bx bx-paint text-blue-500 text-6xl mb-2"></i>
+            </div>
+            <h1 className="font-semibold text-xl text-primary">Front-end Development</h1>
+            <p className="text-sm text-zinc-500 leading-6">
+              Menguasai HTML, CSS, JavaScript, dan framework seperti React.
+            </p>
           </div>
         </div>
       </div>
